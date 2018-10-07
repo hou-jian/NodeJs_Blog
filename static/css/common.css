@@ -1,0 +1,378 @@
+/* ===================图标字体设置================== */
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1537711074451'); /* IE9*/
+  src: url('iconfont.eot?t=1537711074451#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff;charset=utf-8;base64,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') format('woff'),
+  url('iconfont.ttf?t=1537711074451') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1537711074451#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* =================公共样式========================== */
+* {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+}
+::selection {
+    background: #d7dbf0;
+}
+a {
+    text-decoration: none;
+}
+html,body {
+    /* min-height: 100%; */
+
+}
+ul {
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+}
+.clearfix:before,.clearfix:after {
+  content:"";
+  display:table;  /* 这句话可以出发BFC BFC可以清除浮动,BFC我们后面讲 */
+}
+.clearfix:after {
+ clear:both;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #b6b6b6;
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+/* ===========================sidebar========================== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    width: 240px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    /* -webkit-transform: translateZ(0);
+    transform: translateZ(0); */
+    transition: all .4s cubic-bezier(.18, .81, .3, .89);
+}
+.shut {
+    position: absolute;
+    right: -30px;
+    top: 20px;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+}
+/* 小于1200px时，侧边栏与关闭按钮样式 */
+@media screen and (max-width: 1200px) {
+    .sidebar {
+        box-shadow: none;
+        transform: translateX(-100%);
+    }
+    .shut {
+        display: none;
+    }
+}
+
+
+.brand {
+    /* position: relative; */
+    background-image: url(../img/brand.jpg);
+    background-size: 100% 100%;
+    width: 100%;
+    height: 210px;
+}
+.brand > div {
+    background-color: rgba(63,81,181,0.5);
+    width: inherit;
+    height: inherit;
+    padding: 45px 0 0 20px;
+}
+.brand #name {
+    color: #fff;
+    font-size: 16px;
+    line-height: 24px;
+}
+.brand #e-mail {
+    display: inline-block;
+    padding-top: 4px;
+    color: #c5cae9;
+    font-size: 13px;
+}
+.brand #e-mail a {
+    color: inherit;
+}
+.brand #e-mail a:hover {
+    text-decoration: underline;
+}
+
+#head-portrait {
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    overflow: hidden;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    margin-bottom: 10px;
+}
+
+#head-portrait img {
+    width: 100%;
+}
+
+.about {
+    padding: 12px 0;
+}
+.about-item {
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 20px;
+    color: #727272;
+}
+.about-item a{
+    display: block;
+    color: inherit;
+    width: inherit;
+    font-weight: 500;
+}
+.about-item:hover {
+    color: #3f51b5;
+    background-color: rgba(0,0,0,0.05);
+}
+.about-item .iconfont {
+    font-size: 20px;
+    margin-right: 15px;
+}
+.about-item.activate {
+    color: #3f51b5;
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* =============================header============================ */
+main {
+    min-height: 100%;
+    position: relative;
+    padding-left: 240px;
+    transition: all .4s cubic-bezier(.18, .81, .3, .89);
+    box-sizing: border-box;
+    background: #F6F6F6;
+    overflow: hidden;
+}
+header {
+    width: 100%;
+
+    padding-top: 56px;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+header .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 56px;
+    line-height: 56px;
+    width: inherit;
+    z-index: 22;
+    background: #3f51b5;
+    text-align: center;
+
+}
+header .header.fixed {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+header .header .menu {
+    display: none;
+    position: absolute;
+    left: 15px;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+    z-index: 100;
+}
+
+header .header .header-title {
+    height: inherit;
+    line-height: inherit;
+    display: none;
+    color: #fff;
+    font-size: 16px;
+
+}
+/* .header同时有.fixed 时，显示.header-title */
+header .header.fixed .header-title {
+    display: block;
+}
+header .header-content {
+    height: 170px;
+    width: inherit;
+    background: #3f51b5;
+    padding: 40px 0 0 20px;
+}
+header .header-content > div {
+    height: inherit;
+    width: 960px;
+    margin: 0 auto;
+}
+header .header-content h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+    font-size: 40px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+header .header-content span {
+    font-weight: 300;
+    color: #c5cae9;
+    font-size: 16px;
+}
+/* 处理小余1200px时，菜单按钮、main的样式 */
+@media screen and (max-width: 1200px) {
+    main {
+        padding-left: 0;
+    }
+    header .iconfont {
+        display: block;
+    }
+    header .header .menu {
+        display: block;
+    }
+    .mask {
+        visibility: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 88;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        pointer-events: none;
+        opacity: 0;
+        transition: all .4s ease-in-out;
+    }
+}
+
+/* ======================footer=============================== */
+footer {
+    width: 100%;
+    background: #3f51b5;
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    text-align: center;
+}
+
+footer .footer-top {
+    display: inline-block;
+    padding: 16px;
+
+}
+footer .footer-top i {
+    height: inherit;
+    line-height: inherit;
+    font-size: 16px;
+}
+
+footer p {
+    display: inline-block;
+    margin: 0;
+    height: 20px;
+    line-height: 20px;
+}
+footer .footer-bottom {
+    padding: 16px;
+    background: #303f9f;
+}
+footer .footer-bottom a {
+    color: #fff;
+    opacity: .7;
+    border-bottom: 1px dotted rgba(255,255,255,0.5);
+}
+footer .footer-bottom a:hover {
+    opacity: 1;
+}
+/*=================返回顶部=====================  */
+.backToTop {
+    position: fixed;
+    right: 16px;
+    bottom: 30px;
+    z-index: 50;
+    width: 56px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    color: #fff;
+    background: #ff4081;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    transition: transform .4s ease-in-out;
+    transform: translateX(200%);
+}
+.backToTop .iconfont {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/*============== tags ==================================*/
+.post-tags {
+    width: inherit;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+.post-tags .tags-list {
+    padding-top: 10px;
+
+}
+.post-tags .tags-list li {
+    float: left;
+    display: inline-block;
+    margin: 0 8px 8px 0;
+    border-radius: 2px;
+    /* padding: 5px; */
+}
+.post-tags .tags-list li a {
+    display: block;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    transition: .2s ease-in-out;
+}
+.post-tags .tags-list li:hover {
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.26)
+}
+
+.post-tags .tags-list li:nth-child(1) {
+    background: #8bc34a;
+}
+.post-tags .tags-list li:nth-child(2) {
+    background: #673ab7;
+}
+.post-tags .tags-list li:nth-child(3) {
+    background: #ff9800;
+}
+.post-tags .tags-list li:nth-child(4) {
+    background: #f44336;
+}
+.post-tags .tags-list li:nth-child(5) {
+    background: #00abc0;
+}
+.post-tags .tags-list li:nth-child(6) {
+    background: #2196f3;
+}

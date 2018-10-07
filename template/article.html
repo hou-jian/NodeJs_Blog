@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文章页</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/article.css">
+    <!-- 代码高亮支持 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-plateau-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <!-- markdown支持  -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</head>
+
+<body>
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div>
+                <a href="/" id="head-portrait"><img src="/img/1.jpg"></a>
+                <div id="name">侯剑</div>
+                <div id="e-mail"><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=z6el-v36_-79-I__vuGsoKI">hj1254123@qq.com</a></div>
+            </div>
+        </div>
+        <div class="about">
+            <div class="about-item activate"><a href="/"><i class="iconfont">&#xe624;</i>Home</a></div>
+            <div class="about-item"><a href="/tags.html"><i class="iconfont">&#xec34;</i>Tags</a></div>
+            <div class="about-item"><a href="/"><i class="iconfont">&#xe607;</i>Github</a></div>
+        </div>
+        <div class="iconfont shut">&#xe61a;</div>
+    </aside>
+
+    <main>
+        <article>
+            <!-- header -->
+            <header>
+                <div class="header">
+                    <i class="iconfont menu">&#xe61e;</i>
+                    <span class="header-title">文章标题</span>
+                </div>
+                <div class="header-content">
+                </div>
+            </header>
+
+            <div class="content clearfix">
+                <!-- 文章 -->
+                <div class="article clearfix">
+
+                    <div class="article-title">
+                        <h1>文章标题</h1>
+                        <time>2018年10月7日</time>
+                    </div>
+                    <!-- 文章内容 -->
+                    <div class="article-content">
+                        <div class="article-content">
+<h2>我的技能</h2>
+<ul>
+<li><code>html</code>、<code>css</code>、<code>js</code>、<code>vue</code>、<code>nodeJS</code></li>
+</ul>
+<h2>我的作品</h2>
+<ul>
+<li>todo程序</li>
+<li>vue-todo</li>
+<li>vue-去哪儿网</li>
+<li>博客</li>
+<li>作品展示页</li>
+</ul>
+<h2>代码</h2>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> a = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'代码高亮测试'</span>)
+}</code></pre>
+<h2>联系我</h2>
+<ul>
+<li>邮箱<code>hj1254123@qq.com</code></li>
+</ul>
+</div>
+                    </div>
+                    <!-- 文章标签 -->
+                    <div class="article-tags">
+                        <div class="post-tags ">
+                            <ul class="tags-list clearfix">
+                                <li class="tags-list-item"><a href="/">标签一</a></li>
+                                <li class="tags-list-item"><a href="/">标签二标签二</a></li>
+                                <li class="tags-list-item"><a href="/">MOngodb</a></li>
+                                <li class="tags-list-item"><a href="/">MOngodb</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- 文章导航栏 -->
+                <div class="article-nav">
+                    <nav>
+                        <h4>TOC</h4>
+                        <ul>
+                            <li><a href="#" class="active">article哈哈</a></li>
+                            <li><a href="#">article</a></li>
+                            <li><a href="#">blockquote</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- 评论 -->
+                <div class="comment clearfix">
+                    <h3>评论区</h3>
+                    <div class="comment-post">
+                        <div class="comment-post-title">
+                            <input type="text" placeholder="昵称">
+                            <input name="mail"type="email" placeholder="邮箱">
+
+                            </div>
+                        <div class="comment-post-content">
+                            <textarea name="name" placeholder="说点什么？"></textarea>
+                        </div>
+                        <button class="comment-submit">回复</button>
+                    </div>
+
+                    <div class="number-of-comments"><span>12</span> 评论</div>
+
+                    <div class="comment-list ">
+                        <div class="comment-icon"><img src="/img/default-icon.png"></div>
+                        <div class="comment-list-box">
+                            <div class="comment-username">default</div>
+                            <div class="comment-time">2018-9-30</div>
+                            <div class="comment-content">我也是，对自己的前端技术有着过分的自信，没想到面试完爆了我。前辈，求指教。我也是，对自己的前端技术有着过分的自信，没想到面试完爆了我。前辈，求指教。我也是，对自己的前端技术有着过分的自信，没想到面试完爆了我。前辈，求指教。</div>
+                            <button class="comment-reply">回复</button>
+                        </div>
+                    </div>
+
+                    <div class="comment-list ">
+                        <div class="comment-icon"><img src="/img/default-icon.png"></div>
+                        <div class="comment-list-box">
+                            <div class="comment-username">default</div>
+                            <div class="comment-time">2018-9-30</div>
+                            <div class="comment-content">我也是，对自己的前端技术有着过分的自信，没想到面试完爆了我。前辈，求指教。我也是，对自己的前端技术有着过分的自信，没想到面试完爆了我。前辈，求指教。我也是，对自己的前端技术有着过分的自信，没想到面试完爆了我。前辈，求指教。</div>
+                            <button class="comment-reply">回复</button>
+                        </div>
+                    </div>
+
+                    <div class="comment-list ">
+                        <div class="comment-icon"><img src="/img/default-icon.png"></div>
+                        <div class="comment-list-box">
+                            <div class="comment-username">default</div>
+                            <div class="comment-time">2018-9-30</div>
+                            <div class="comment-content">我也是，对自己的前端技术有着过分的自信，没想到面试完爆了我。前辈，求指教。我也是，对自己的前端技术有着过分的自信，没想到面试完爆了我。前辈，求指教。我也是，对自己的前端技术有着过分的自信，没想到面试完爆了我。前辈，求指教。</div>
+                            <button class="comment-reply">回复</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- footer -->
+            <footer>
+                <div class="footer-top">
+
+                    <p>由于技术有限，本博客暂时不会更新，仅用于练习代码能力</p>
+                </div>
+                <div class="footer-bottom">
+                    <p>
+                        前端使用: 原生 [JS · HTML · CSS];后端使用: [NodeJS] 开发;
+                        <br>
+                        样式防自<a href="https://imys.net">imys.net</a>;
+                        <br>
+                        ---END---
+
+
+
+
+
+
+
+                    </p>
+                </div>
+            </footer>
+            <div class="mask"></div>
+        </article>
+
+    </main>
+
+    
+    <!-- 返回页面顶部 -->
+    <a href="JavaScript:;" class="backToTop">
+        <span class="iconfont">&#xe67f;</span>
+    </a>
+
+    <script src="js/iviv.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/article.js"></script>
+</body>
+
+</html>
