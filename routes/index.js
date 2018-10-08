@@ -2,13 +2,7 @@ const express = require('express')
 const router = express.Router()
 const fs = require('fs')
 
-// 需要文章data
-// 评论data
-
-router.get('/', function(req, res) {
-    res.send('hello, express')
-})
-
+// 用于读取template里的html文件并返回给浏览器
 const sendHtml = function(path, response) {
     var options = {
         encoding: 'utf-8'
@@ -29,8 +23,36 @@ const index = {
     }
 }
 
+const article = {
+    path: '/article',
+    method: 'get',
+    func: function(request, response) {
+        var path = 'article.html'
+        sendHtml(path, response)
+    }
+}
+
+const tags = {
+    path: '/tags',
+    method: 'get',
+    func: function(request, response) {
+        var path = 'tags.html'
+        sendHtml(path, response)
+    }
+}
+const uploadArticle = {
+    path: '/up',
+    method: 'get',
+    func: function(request, response) {
+        var path = 'uploadArticle.html'
+        sendHtml(path, response)
+    }
+}
 const routes = [
-    index
+    index,
+    article,
+    tags,
+    uploadArticle
 ]
 
 module.exports.routes = routes

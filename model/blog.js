@@ -1,6 +1,6 @@
 const fs = require('fs')
-
-const articleFilePath = 'db/article.json'
+const tags = require('./tags')
+const articleFilePath = 'db/blog.json'
 
 // 用于存储article数据
 const ModelArticle = function(form) {
@@ -23,8 +23,26 @@ const b = {
 }
 
 b.all = function() {
-    var articles = this.data
-    return articles
+    // 读取blog.json数据
+    var blog = this.data
+    //读取tags数据
+    var tagsAll = tags.all()
+
+    console.log('blog', blog);
+    console.log("tagsall", tagsAll)
+    // 把属于blog[i]的标签添加给blog，用articleTags保存
+    for (var i = 0; i < blog.length; i++) {
+        var l = []
+        var blogID = blog[i].id
+        for (var j = 0; j < tagsAll.length; j++) {
+            var t = tagsAll[j].blogID
+            if (blogID === t) {
+                l.push(tagsAll[j].tagsContent)
+            }
+        }
+        blog[i].articleTags = l
+    }
+    return blog
 }
 
 b.save = function() {

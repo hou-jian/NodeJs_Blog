@@ -166,7 +166,6 @@ ul {
 
 /* =============================header============================ */
 main {
-    min-height: 100%;
     position: relative;
     padding-left: 240px;
     transition: all .4s cubic-bezier(.18, .81, .3, .89);

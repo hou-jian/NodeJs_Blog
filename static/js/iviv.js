@@ -70,3 +70,33 @@ var backTop = function() {
     clearTimeout(scrolldelay)
   }
 }
+
+// request为一个对象，选项：method(请求方式)、url、contentType(文件类型)、data、callback
+var ajax = function(request) {
+    var r = new XMLHttpRequest()
+    r.open(request.method, request.url, true)
+    if (request.contentType !== undefined) {
+        r.setRequestHeader('Content-Type', request.contentType)
+    }
+    r.onreadystatechange = function() {
+        if(r.readyState === 4) {
+            request.callback(r.response)
+        }
+    }
+    if (request.method === 'GET') {
+        r.send()
+    } else {
+        r.send(request.data)
+    }
+}
+// 传入毫秒时间生成2018/10/8 0:18:21格式
+var formatTime = function(t) {
+    var d = new Date(t)
+    var nm = d.getFullYear()
+    var yt = d.getMonth() + 1
+    var ri = d.getDate()
+    var ui = d.getHours()
+    var ff = d.getMinutes()
+    var mn = d.getSeconds()
+    return `${nm}/${yt}/${ri} ${ui}:${ff}:${mn}`
+}
