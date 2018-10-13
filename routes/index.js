@@ -40,6 +40,7 @@ const tags = {
         sendHtml(path, response)
     }
 }
+
 const uploadArticle = {
     path: '/up',
     method: 'get',
@@ -48,6 +49,7 @@ const uploadArticle = {
         sendHtml(path, response)
     }
 }
+
 const routes = [
     index,
     article,

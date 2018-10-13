@@ -21,7 +21,8 @@ const registerRoutes = function(app, routes) {
 // 这里的第二个参数，是router模块导入的
 registerRoutes(app, indexRouter.routes)
 registerRoutes(app, articleRouter.routes)
-
+// console.log('indexRouter', indexRouter);
+// console.log('articleRouter', articleRouter);
 
 //
 app.listen(3000, function() {

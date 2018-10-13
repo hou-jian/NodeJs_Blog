@@ -60,12 +60,13 @@ var ajaxArticleData = function() {
 
     ajax({
         method: 'GET',
-        url: '/api/blog/all',
+        url: '/api/article/all',
         contentType: 'application/json',
         callback: function(response) {
             var res = JSON.parse(response)
+            console.log('回调', response);
             // 调用渲染函数
-            loadArticleList(res)
+            // loadArticleList(res)
         }
     })
 
