@@ -1,1 +1,13 @@
-[{"articleID":1,"tagsID":1,"id":1}]{"articleID":1,"tagsID":2,"id":2}]
+[{
+    "articleID": 1,
+    "tagsID": 6,
+    "id": 1
+}, {
+    "articleID": 2,
+    "tagsID": 1,
+    "id": 2
+}, {
+    "articleID": 2,
+    "tagsID": 2,
+    "id": 3
+}]

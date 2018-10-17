@@ -1,19 +1,19 @@
 var returnSectionDOM = function(data) {
 
     // 格式化后的时间
-    var time = formatTime(data.articleTime * 1000)
+    var time = formatTime(data.time * 1000)
     // 模板
     var s = `
     <section id="${data.id}">
         <time class="post-time">${time}</time>
-        <h3 class="post-title"><a href="article">${data.title}</a></h3>
+        <h3 class="post-title"><a href="article#${data.id}">${data.title}</a></h3>
         <div class="post-content">
-            <p>${data.articleIntro}</p>
-            <a href="#">阅读全文...</a>
+            <p>${data.intro}</p>
+            <a href="article?#${data.id}">阅读全文...</a>
         </div>
         <div class="post-tags clearfix">
             <ul class="tags-list tagsID-${data.id}">
-                <li class="tags-list-item"><a href="/">暂无</a></li>
+                <li class="tags-list-item"><a href="/tags">暂无</a></li>
             </ul>
         </div>
     </section>
@@ -21,11 +21,11 @@ var returnSectionDOM = function(data) {
     return s
 }
 
-var returnTagsDOM = function(tags) {
+var returnTagsDOM = function(tags, tagsID) {
     var html = ''
     for (var i = 0; i < tags.length; i++) {
         var d = `
-            <li class="tags-list-item"><a href="/">${tags[i]}</a></li>
+            <li class="tags-list-item"><a href="/tags?tagsID=${tagsID[i]}">${tags[i]}</a></li>
         `
         html += d
     }
@@ -33,7 +33,7 @@ var returnTagsDOM = function(tags) {
 }
 
 var loadArticleList = function(data) {
-    console.log('data', data);
+
     // 获取content
     var content = e('.content')
     // 模板添加
@@ -48,9 +48,10 @@ var loadArticleList = function(data) {
         // 获取当前section的tags-list
         var tagDOM = e(`.tagsID-${data[i].id}`)
         // 获取当前section的标签数组
-        var tags = data[i].articleTags
+        var tag = data[i].tags
+        var tagsID = data[i].tagsIDArr
         // 返回tags的dom
-        var t = returnTagsDOM(tags)
+        var t = returnTagsDOM(tag, tagsID)
         // 添加到section>tags-list中
         tagDOM.innerHTML = t
     }
@@ -66,7 +67,7 @@ var ajaxArticleData = function() {
             var res = JSON.parse(response)
             console.log('回调', response);
             // 调用渲染函数
-            // loadArticleList(res)
+            loadArticleList(res)
         }
     })
 

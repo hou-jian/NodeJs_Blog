@@ -64,12 +64,12 @@ b.new = function(arr) {
 
             // 添加并保存给tags.json
             this.data.push(m)
-            this.save()
 
             tagsIDArray.push(m.id)
         }
     }
 
+    this.save()
 
     return tagsIDArray
 }

@@ -49,11 +49,28 @@ b.new = function(articleID, tagsIDArr) {
             m.id = d.id + 1
         }
         this.data.push(m)
-        this.save()
     }
 
+    this.save()
 
 
 }
+b.del = function(id) {
+    var d = this.data
+    // 存放需要删除的对象下标
+    var l = []
+    for (var i = 0; i < d.length; i++) {
+        if (d[i].articleID == id) {
+            l.push(i)
+        }
+    }
 
+    // 计数，因为删了一个，this.data会变短
+    var j = 0
+    for (var i = 0; i < l.length; i++) {
+        this.data.splice(l[i] - j, 1)
+        j++
+    }
+    this.save()
+}
 module.exports = b

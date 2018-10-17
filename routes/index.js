@@ -9,7 +9,7 @@ const sendHtml = function(path, response) {
     }
     path = 'template/' + path
     fs.readFile(path, options, function(err, data) {
-        console.log(`读取的html文件 ${path} 内容是`, data)
+        console.log(`读取了 ${path}文件 `)
         response.send(data)
     })
 }

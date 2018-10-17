@@ -12,22 +12,28 @@ const ModelArticle = function(form) {
     this.content = form.content || ''
 }
 
-const returnTagsIDArr = function(id, article_tags) {
+const returnTagsIDArr = function(id) {
+    // 读取article&tags.json
+    var articleTagsData = articleTags.all()
+
     var tagsIDArr = []
-    for (var i = 0; i < article_tags.length; i++) {
-        var item = article_tags[i]
+    for (var i = 0; i < articleTagsData.length; i++) {
+        var item = articleTagsData[i]
         if (id === item.articleID) {
             tagsIDArr.push(item.tagsID)
         }
     }
     return tagsIDArr
 }
-const returnTagsNameArr = function(tagsIDArr, tags) {
+const returnTagsNameArr = function(tagsIDArr) {
+    // 读取tags.json
+    var tagsData = tags.all()
+
     var tagsArr = []
     for (var i = 0; i < tagsIDArr.length; i++) {
-        for (var j = 0; j < tags.length; j++) {
-            if (tagsIDArr[i] === tags[j].id) {
-                tagsArr.push(tags[j].tagName)
+        for (var j = 0; j < tagsData.length; j++) {
+            if (tagsIDArr[i] === tagsData[j].id) {
+                tagsArr.push(tagsData[j].tagName)
                 break
             }
         }
@@ -53,13 +59,7 @@ b.all = function() {
     if (content.length === 0) {
         return data
     }
-    // console.log('content', content);
-    // 读取article&tags.json
-    var articleTagsData = articleTags.all()
-    // console.log("articleTagsData", articleTagsData);
-    // 读取tags.json
-    var tagsData = tags.all()
-    // console.log('tagsData', tagsData);
+
     // l存放返回的数据
     for (var i = 0; i < content.length; i++) {
         var l = {}
@@ -71,13 +71,14 @@ b.all = function() {
         l.intro = item.intro
         // 比较item.id 与 对照表里的article.id，返回tagsID数组
 
-        var tagsIDArr = returnTagsIDArr(item.id, articleTagsData)
-        // console.log('tagsIDArr', tagsIDArr);
+        var tagsIDArr = returnTagsIDArr(item.id)
+
         // 比对tagsID与id，取出tagsName
-        var tagsNameArr = returnTagsNameArr(tagsIDArr, tagsData)
+        var tagsNameArr = returnTagsNameArr(tagsIDArr)
         // 添加给l
+        l.tagsIDArr = tagsIDArr
         l.tags = tagsNameArr
-        console.log('l', l);
+
         data.push(l)
     }
     // 返回
@@ -101,9 +102,8 @@ b.new = function(form) {
 
     // 给新数据添加唯一id
     var d = this.data[this.data.length - 1]
-    console.log('ddd', d == undefined);
-    if (d === undefined) {
 
+    if (d === undefined) {
         m.id = 1
     } else {
         m.id = d.id + 1
@@ -121,5 +121,45 @@ b.new = function(form) {
     articleTags.new(m.id, tagsIDArr)
     return m
 }
+
+b.del = function(articleID) {
+    var d = this.data
+    for (var i = 0; i < d.length; i++) {
+        if (d[i].id == articleID) {
+            this.data.splice(i, 1)
+            this.save()
+            break
+        }
+    }
+}
+
+b.articleID = function(id) {
+    // 找出article对应ID的content
+    var d = this.data
+    for (var i = 0; i < d.length; i++) {
+        if (id == d[i].id) {
+            var item = d[i]
+            // 比较item.id 与 对照表里的article.id，返回tagsID数组
+            var tagsIDArr = returnTagsIDArr(item.id)
+
+            // 比对tagsID与id，取出tagsName
+            var tagsNameArr = returnTagsNameArr(tagsIDArr)
+            item.tagsIDArr = tagsIDArr
+            item.tags = tagsNameArr
+            return item
+        }
+    }
+}
+
+
+// // form存了需要修改的数据
+// b.change = function(form) {
+//     // 1.获取上传数据的文章ID
+//     var id = form.id
+//     // 2.修改article.json对应文件
+//     var articleData = this.data
+//
+//     // 3.把修改后的数据返回
+// }
 
 module.exports = b

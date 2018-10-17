@@ -1,31 +1,45 @@
-// 
-// var readLocalText = function(dom, callback) {
-//     document.getElementById(dom).onchange = function() {
-//         var file = this.files[0]
-//         var reader = new FileReader()
-//         reader.onload = function(e) {
-//             callback(e.target.result)
-//         }
-//         reader.readAsText(file)
-//     }
-// }
+var RenderMarkdown = function(data) {
+    // 修改标题
+    e('.article-title-h1').innerHTML  = data.title
+    e('.article-content').innerHTML = marked(data.content, {
+        // 代码高亮设置
+        highlight: function(code) {
+            // 这里用的highlightAuto
+            return hljs.highlightAuto(code).value;
+        }
+    })
+    // 修改标签
+    //
+    var tagsDom = e('.tags-list')
+    if (data.tags.length == 0) {
+        tagsDom.insertAdjacentHTML('beforeend', `<li class="tags-list-item"><a href="/tags">未添加标签</a></li>`)
 
+    }
+    for (var i = 0; i < data.tags.length; i++) {
+        tagsDom.insertAdjacentHTML('beforeend', `<li class="tags-list-item"><a href="/tags?tagsID=${data.tagsIDArr[i]}">${data.tags[i]}</a></li>`)
+
+    }
+}
+
+
+var getArticleData = function() {
+    var id = location.hash.slice(1)
+    var u = '/api/articleID?articleID=' + id
+    console.log('url', u);
+    // 获取到对应id的文章
+    ajax({
+        method: 'GET',
+        url: u,
+        contentType: 'application/json',
+        callback: function(response) {
+            var res = JSON.parse(response)
+            // console.log('回调', response);
+            RenderMarkdown(res)
+        }
+    })
+}
 var __main = function() {
-
-    // window.nav = []
-    // // 读取上传给浏览器的文件
-    // readLocalText('file', function(text) {
-    //     // 得到文件内容后，渲染为markdown
-    //     e('.article-content').innerHTML = marked(text, {
-    //         // 代码高亮设置
-    //         highlight: function(code) {
-    //             // 这里用的highlightAuto
-    //             return hljs.highlightAuto(code).value;
-    //         },
-    //         // 禁用自动添加id
-    //         headerIds: false
-    //     })
-    // })
+    getArticleData()
 }
 
 __main()
