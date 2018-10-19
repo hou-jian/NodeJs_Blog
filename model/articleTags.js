@@ -73,4 +73,44 @@ b.del = function(id) {
     }
     this.save()
 }
+
+b.articleIDTagsAll = function(id) {
+    var d = this.data
+    //
+    var l = []
+    for (var i = 0; i < d.length; i++) {
+        if (d[i].tagsID == id) {
+            l.push(d[i].articleID)
+        }
+    }
+    // 返回tagsID对应的articleID数组
+    return l
+}
+
+// 返回包含tagsID的articleID数组
+b.getTagsIdArticleIdObj = function() {
+    var l = this.data
+    // 存放查重tagsID
+    var arr = []
+    // 待返回对象
+    var data = {}
+    //
+    for (var i = 0; i < l.length; i++) {
+        var tagsID = l[i].tagsID
+        var articleID = l[i].articleID
+        // key不存在初始化
+        if (arr.indexOf(tagsID) == -1) {
+            data[tagsID] = []
+            data[tagsID].push(articleID)
+            arr.push(tagsID)
+        } else {
+            // key存在，直接添加
+            data[tagsID].push(articleID)
+        }
+    }
+    var a = []
+    a.push(arr)
+    a.push(data)
+    return a
+}
 module.exports = b

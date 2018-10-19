@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+
 // 导入路由模块
 const indexRouter = require('./routes/index')
 const articleRouter = require('./routes/blog')
+const commentRouter = require('./routes/comment')
+const tagsRouter = require('./routes/tags')
 
 app.use(bodyParser.json())
 // 配置静态文件目录
@@ -21,8 +24,9 @@ const registerRoutes = function(app, routes) {
 // 这里的第二个参数，是router模块导入的
 registerRoutes(app, indexRouter.routes)
 registerRoutes(app, articleRouter.routes)
-// console.log('indexRouter', indexRouter);
-// console.log('articleRouter', articleRouter);
+registerRoutes(app, commentRouter.routes)
+registerRoutes(app, tagsRouter.routes)
+
 
 //
 app.listen(3000, function() {

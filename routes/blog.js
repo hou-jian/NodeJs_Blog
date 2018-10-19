@@ -5,7 +5,6 @@ const all = {
     path: '/api/article/all',
     method: 'get',
     func: function(request, response) {
-
         // 读取文章数据（article见第一行）
         var data = article.all()
         var r = JSON.stringify(data)
@@ -56,7 +55,7 @@ const articleID = {
     method: 'get',
     func: function(request, response) {
         var articleID = request.query.articleID
-        console.log('articleID', articleID);
+        // console.log('articleID', articleID);
         var data = article.articleID(articleID)
         var r = JSON.stringify(data)
         response.send(r)

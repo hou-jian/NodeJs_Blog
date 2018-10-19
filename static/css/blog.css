@@ -9,7 +9,8 @@
     padding: 20px 20px 0 20px;
     background: #fff;
     border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(151,151,151,0.58);
+    -webkit-box-shadow: 0 1px 2px rgba(151,151,151,0.58);
+            box-shadow: 0 1px 2px rgba(151,151,151,0.58);
     margin-bottom: 30px;
 }
 .content section time {
@@ -39,6 +40,7 @@
     bottom: 0;
     left: 50%;
     background-color: #3f51b5;
+    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
 .content section h3 a:hover::after {
@@ -85,6 +87,7 @@
     color: #727272;
     border-radius: 3px;
     overflow: hidden;
+    -webkit-transition: .4s ease-in-out;
     transition: .4s ease-in-out;
 }
 .page-nav a:hover {

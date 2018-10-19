@@ -71,7 +71,14 @@ var backTop = function() {
   }
 }
 
-// request为一个对象，选项：method(请求方式)、url、contentType(文件类型)、data、callback
+/* request为一个对象
+选项：
+    method(请求方式)
+    url
+    contentType(文件类型)
+    data
+    callback
+*/
 var ajax = function(request) {
     var r = new XMLHttpRequest()
     r.open(request.method, request.url, true)
@@ -98,5 +105,5 @@ var formatTime = function(t) {
     var ui = d.getHours()
     var ff = d.getMinutes()
     var mn = d.getSeconds()
-    return `${nm}/${yt}/${ri} ${ui}:${ff}:${mn}`
+    return `${nm}/${yt}/${ri}`
 }

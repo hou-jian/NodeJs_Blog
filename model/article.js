@@ -151,7 +151,25 @@ b.articleID = function(id) {
     }
 }
 
+// 根据参数(数组)各项的id,找出对应的数据,并返回
+b.arrayIdAll = function(arr) {
+    var l = []
+    var d = this.data
+    for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < d.length; j++) {
+            if (arr[i] == d[j].id) {
+                l.push(d[j])
+                break
+            }
+        }
+    }
 
+    return l
+}
+
+b.dataAll = function() {
+    return this.data
+}
 // // form存了需要修改的数据
 // b.change = function(form) {
 //     // 1.获取上传数据的文章ID

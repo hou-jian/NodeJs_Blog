@@ -16,16 +16,14 @@ var RenderMarkdown = function(data) {
 
     }
     for (var i = 0; i < data.tags.length; i++) {
-        tagsDom.insertAdjacentHTML('beforeend', `<li class="tags-list-item"><a href="/tags?tagsID=${data.tagsIDArr[i]}">${data.tags[i]}</a></li>`)
+        tagsDom.insertAdjacentHTML('beforeend', `<li class="tags-list-item"><a href="/tags#${data.tagsIDArr[i]}">${data.tags[i]}</a></li>`)
 
     }
 }
 
-
 var getArticleData = function() {
-    var id = location.hash.slice(1)
-    var u = '/api/articleID?articleID=' + id
-    console.log('url', u);
+    var u = '/api/articleID?articleID=' + articleID
+
     // 获取到对应id的文章
     ajax({
         method: 'GET',
@@ -38,8 +36,97 @@ var getArticleData = function() {
         }
     })
 }
+
+var returnCommentDom = function(form) {
+
+    var time = formatTime(form.time * 1000)
+
+    var d = `
+    <div class="comment-list">
+        <div class="comment-icon"><img src="/img/default-icon.png"></div>
+        <div class="comment-list-box">
+            <div class="comment-username">${form.name}</div>
+            <div class="comment-time">${time}</div>
+            <div class="comment-content">${form.content}</div>
+            <button class="comment-reply">回复</button>
+        </div>
+    </div>
+    `
+    return d
+}
+
+var renderComment = function(form) {
+    // 获取comment
+    var comment = e('.number-of-comments')
+    // 渲染dom
+    var dom = returnCommentDom(form)
+    // 添加到页面
+    comment.insertAdjacentHTML('afterend', dom)
+}
+
+var addComment = function() {
+
+    // 获取.comment-submit
+    var sub = e('.comment-submit')
+    //
+    var form = {}
+    bindEvent(sub, 'click', function() {
+        form.articleID = Number(articleID)
+        form.name = e('#formName').value
+        form.email = e('#formMail').value
+        form.content = e('#formContent').value
+
+        // 内容不能为空
+        if (form.content == '') {
+            return
+        }
+
+
+        ajax({
+            method: 'post',
+            url: '/api/comment/add',
+            contentType: 'application/json',
+            data: JSON.stringify(form),
+            callback: function(response) {
+                var res = JSON.parse(response)
+                console.log('res', res);
+                // 把新添加的评论渲染到页面
+                renderComment(res)
+
+                e('#formContent').value = ''
+            }
+        })
+    })
+}
+
+var renderCommentAll = function(data) {
+
+    for (var i = 0; i < data.length; i++) {
+        renderComment(data[i])
+    }
+}
+
+var getCommentData = function() {
+    ajax({
+        method: 'get',
+        url: '/api/comment?articleID=' + articleID,
+
+        callback: function(response) {
+            var res = JSON.parse(response)
+            renderCommentAll(res)
+        }
+    })
+}
 var __main = function() {
-    getArticleData()
+    onload = function() {
+        window.articleID = location.hash.slice(1)
+        // 获取文章数据,并渲染
+        getArticleData()
+        // 获取评论数据，并渲染
+        getCommentData()
+    }
+    // 添加评论
+    addComment()
 }
 
 __main()

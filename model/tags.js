@@ -21,6 +21,7 @@ const b = {
 b.all = function() {
     // 读取tags.json数据
     var d = this.data
+    
     return d
 }
 
@@ -34,6 +35,7 @@ b.save = function() {
         }
     })
 }
+
 const tagsNameChecking = function(name, data) {
     for (var i = 0; i < data.length; i++) {
         if (name == data[i].tagName) {
@@ -42,6 +44,7 @@ const tagsNameChecking = function(name, data) {
     }
     return false
 }
+
 // arr为存放tagsName的数组
 b.new = function(arr) {
     // 因为一次可能有多个标签，用于存放tagsID
@@ -72,6 +75,15 @@ b.new = function(arr) {
     this.save()
 
     return tagsIDArray
+}
+
+b.returnTagsName = function(tagsID) {
+    var d = this.data
+    for (var i = 0; i < d.length; i++) {
+        if (d[i].id == tagsID) {
+            return d[i].tagName
+        }
+    }
 }
 
 module.exports = b

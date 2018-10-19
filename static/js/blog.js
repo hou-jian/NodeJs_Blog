@@ -9,7 +9,7 @@ var returnSectionDOM = function(data) {
         <h3 class="post-title"><a href="article#${data.id}">${data.title}</a></h3>
         <div class="post-content">
             <p>${data.intro}</p>
-            <a href="article?#${data.id}">阅读全文...</a>
+            <a href="article#${data.id}">阅读全文...</a>
         </div>
         <div class="post-tags clearfix">
             <ul class="tags-list tagsID-${data.id}">
@@ -25,7 +25,7 @@ var returnTagsDOM = function(tags, tagsID) {
     var html = ''
     for (var i = 0; i < tags.length; i++) {
         var d = `
-            <li class="tags-list-item"><a href="/tags?tagsID=${tagsID[i]}">${tags[i]}</a></li>
+            <li class="tags-list-item"><a href="/tags#${tagsID[i]}">${tags[i]}</a></li>
         `
         html += d
     }
