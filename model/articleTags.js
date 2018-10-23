@@ -36,7 +36,7 @@ b.save = function() {
     })
 }
 
-// arr为存放tagsName的数组
+// 给单个文章(articleID)，添加多个tagID(数组方式)
 b.new = function(articleID, tagsIDArr) {
 
     for (var i = 0; i < tagsIDArr.length; i++) {
@@ -55,6 +55,7 @@ b.new = function(articleID, tagsIDArr) {
 
 
 }
+
 b.del = function(id) {
     var d = this.data
     // 存放需要删除的对象下标
@@ -74,6 +75,7 @@ b.del = function(id) {
     this.save()
 }
 
+// 根据tagID 返回所有的articleID
 b.articleIDTagsAll = function(id) {
     var d = this.data
     //
@@ -113,4 +115,34 @@ b.getTagsIdArticleIdObj = function() {
     a.push(data)
     return a
 }
+
+// 添加点个关系项
+b.addSingle = function(articleID, tagsID) {
+    var m = new ModelTags(articleID, tagsID)
+    // 给新数据添加唯一id
+    var d = this.data[this.data.length - 1]
+    if (d == undefined) {
+        m.id = 1
+    } else {
+        m.id = d.id + 1
+    }
+    this.data.push(m)
+    this.save()
+}
+
+// 根据文章id，返回tagId数组
+b.returnTagsIDArr = function(id) {
+    // 读取article&tags.json
+    var d = this.data
+
+    var tagsIDArr = []
+    for (var i = 0; i < d.length; i++) {
+        var item = d[i]
+        if (id === item.articleID) {
+            tagsIDArr.push(item.tagsID)
+        }
+    }
+    return tagsIDArr
+}
+// b.
 module.exports = b

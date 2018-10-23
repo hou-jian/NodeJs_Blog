@@ -12,6 +12,7 @@ const ModelArticle = function(form) {
     this.content = form.content || ''
 }
 
+// 根据文章id，返回tagId数组
 const returnTagsIDArr = function(id) {
     // 读取article&tags.json
     var articleTagsData = articleTags.all()
@@ -25,6 +26,7 @@ const returnTagsIDArr = function(id) {
     }
     return tagsIDArr
 }
+// 根据tagId数组，返回tagName数组
 const returnTagsNameArr = function(tagsIDArr) {
     // 读取tags.json
     var tagsData = tags.all()
@@ -133,8 +135,9 @@ b.del = function(articleID) {
     }
 }
 
+// 根据文章id，返回{{文章数据},[标签数组],[标签名称数组]}
 b.articleID = function(id) {
-    // 找出article对应ID的content
+    // 找出article对应ID的数据
     var d = this.data
     for (var i = 0; i < d.length; i++) {
         if (id == d[i].id) {

@@ -55,6 +55,12 @@ const articleID = {
     method: 'get',
     func: function(request, response) {
         var articleID = request.query.articleID
+        console.log('articleID', articleID);
+        if (!articleID) {
+            var r = JSON.stringify('articleID参数错误')
+            response.send(r)
+            return
+        }
         // console.log('articleID', articleID);
         var data = article.articleID(articleID)
         var r = JSON.stringify(data)
