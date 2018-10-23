@@ -2,8 +2,7 @@ const articleTags = require('../model/articleTags.js')
 const article = require('../model/article.js')
 const tags = require('../model/tags.js')
 
-// 返回给浏览器
-// key：tagsName，value：[[文章数据1],[文章数据2],[文章数据3]]
+// 返回给浏览器，tagsID：所有文章数据键值对\tags数据\文章数据
 const all = {
     path: '/api/tags/all',
     method: 'get',
@@ -19,7 +18,7 @@ const all = {
     }
 }
 
-
+// 根据tagsID，返回对应的所有文章数据
 const articleAll = {
     path: '/api/tagsID',
     method: 'get',
@@ -40,6 +39,10 @@ const articleAll = {
         var r = JSON.stringify(data)
         response.send(r)
     }
+}
+
+const tagsAdd = {
+
 }
 const routes = [
     all,
