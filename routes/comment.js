@@ -13,21 +13,44 @@ const add = {
     }
 }
 
+// 根据articleID获取评论
 const articleAll = {
     path: '/api/comment',
     method: 'get',
     func: function(request, response) {
-        // articleID
         var articleID = request.query.articleID
+        console.log('articleID', articleID);
+
         var data = comment.articleIDall(articleID)
         var r = JSON.stringify(data)
         response.send(r)
     }
 
 }
+
+// 根据id删除
+const del = {
+    path: '/api/comment/del',
+    method: 'get',
+    func: function(request, response) {
+        var commentId = request.query.commentID
+        console.log('commentId', commentId);
+        
+        var b = comment.del(commentId)
+        if (b) {
+            var r = JSON.stringify('删除成功')
+            response.send(r)
+        } else {
+            var r = JSON.stringify('删除失败')
+            response.send(r)
+        }
+
+    }
+}
 const routes = [
     add,
-    articleAll
+    articleAll,
+    del
 ]
 
 module.exports.routes = routes

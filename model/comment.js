@@ -77,4 +77,17 @@ b.articleIDall = function(id) {
     return l
 }
 
+b.del = function(commentId) {
+    var d = this.data
+    var boo = false
+    d.forEach((item, index) => {
+        if (item.id == commentId) {
+            console.log('index', index);
+            this.data.splice(index, 1)
+            this.save()
+            boo =  true
+        }
+    })
+    return boo
+}
 module.exports = b

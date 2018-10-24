@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章上传</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <nav>
+        <ul class="nav">
+            <li data-name="0">文章上传</li>
+            <li data-name="1">标签管理</li>
+            <li data-name="2">评论管理</li>
+            <li data-name="3">文章内容修改</li>
+        </ul>
+    </nav>
+
+    <div id="tab0" class="up-article" style="display: block">
+        <input id="file" type="file" >
+        <br>
+        <label>设置文章标题
+            <input id="title" type="text">
+        </label>
+        <br>
+        <label>设置文章简介
+            <input id="intro" type="text">
+        </label>
+        <br>
+        <label>设置标签,用 | 分割
+            <input id="tags" type="text">
+        </label>
+        <br>
+        <label>输入密码：
+            <input id="password" type="text">
+        </label>
+        <br>
+        <button id="up">上传</button>
+    </div>
+    <div id="tab1" class="tag" style="display: none">
+        <div class="articleAddTag">
+            <h2>标签追加</h2>
+            <label>
+                文章id
+                <input type="text" class="articleID-tag">
+            </label>
+            <br>
+            <label>
+                标签名称
+                <input type="text" class="tagName-tag">
+            </label>
+            <br>
+            <label>
+                密码
+                <input type="text" class="password-tag">
+            </label>
+            <br>
+            <button id="articleID-tag">提交</button>
+        </div>
+
+        <div class="tagId-del">
+            <h2>标签删除</h2>
+            <label>
+                文章ID
+                <input type="text" class="articleID-del">
+            </label>
+            <label>
+                标签id
+                <input type="text" class="tagID-del">
+            </label>
+            <label>
+                密码
+                <input type="text" class="password-del">
+            </labe>
+            <button id="articleID-del-Tag">提交</button>
+        </div>
+    </div>
+    <div id="tab2" class="comment" style="display: none">
+        <h2>评论管理</h2>
+        <div class="article-list">
+
+        </div>
+    </div>
+    <div id="tab3" class="article-content" style="display: none"><h2>文章内容修改</h2></div>
+    <script src="js/iviv.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

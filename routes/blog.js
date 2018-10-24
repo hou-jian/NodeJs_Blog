@@ -55,7 +55,7 @@ const articleID = {
     method: 'get',
     func: function(request, response) {
         var articleID = request.query.articleID
-        console.log('articleID', articleID);
+        
         if (!articleID) {
             var r = JSON.stringify('articleID参数错误')
             response.send(r)

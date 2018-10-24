@@ -56,6 +56,7 @@ b.new = function(articleID, tagsIDArr) {
 
 }
 
+// 删除包含articleID的所有项
 b.del = function(id) {
     var d = this.data
     // 存放需要删除的对象下标
@@ -144,5 +145,20 @@ b.returnTagsIDArr = function(id) {
     }
     return tagsIDArr
 }
-// b.
+
+// 删除同时包含文章和标签id的项，成功返回true，否则false
+b.delSingle = function(articleId, tagId) {
+    // console.log('artilceid', articleId);
+    // console.log('tagid', tagId);
+    var d = this.data
+    for (var i = 0; i < d.length; i++) {
+        if (d[i].articleID === articleId && d[i].tagsID === tagId) {
+            this.data.splice(i, 1)
+            this.save()
+            return true
+        }
+    }
+
+    return false
+}
 module.exports = b

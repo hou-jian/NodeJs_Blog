@@ -41,11 +41,11 @@ const tags = {
     }
 }
 
-const uploadArticle = {
-    path: '/up',
+const admin = {
+    path: '/admin',
     method: 'get',
     func: function(request, response) {
-        var path = 'uploadArticle.html'
+        var path = 'admin.html'
         sendHtml(path, response)
     }
 }
@@ -54,7 +54,7 @@ const routes = [
     index,
     article,
     tags,
-    uploadArticle
+    admin
 ]
 
 module.exports.routes = routes

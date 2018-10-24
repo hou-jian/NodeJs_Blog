@@ -84,6 +84,12 @@ const addSingle = {
     method: 'post',
     func: function(request, response) {
         var form = request.body
+        // - 验证密码
+        if (form.password !== '410410') {
+            var r = JSON.stringify('添加失败, 密码错误')
+            response.send(r)
+            return
+        }
         // - 验证form.articleID对应的tagName，是否重复
         var o = repeated(form)
         // 为true，说明标签重复，添加失败
@@ -100,15 +106,47 @@ const addSingle = {
         var tagId = tags.addSingle(form.tagName)
 
         // - 把tagId与form.articleID 传给关系表并保存
-        articleTags.addSingle(form.articleID, tagId)
+        articleTags.addSingle(parseInt(form.articleID), tagId)
         var r = JSON.stringify('添加成功')
         response.send(r)
     }
 
 }
+
+// form.articleID
+// form.tagID
+// form.password
+const delSingle = {
+
+    path: '/api/tags/del',
+    method: 'post',
+    func: function(request, response) {
+        var form = request.body
+        // 密码验证
+        if (form.password !== '410410') {
+            var r = JSON.stringify('添加失败, 密码错误')
+            response.send(r)
+            return
+        }
+
+        // 传给articleTags model 删除同时包含这两个的数据
+        var articleId = parseInt(form.articleID)
+        console.log('form', form.tagID);
+        var tagId = parseInt(form.tagID)
+        var b = articleTags.delSingle(articleId, tagId)
+        if (b) {
+            var r = JSON.stringify('删除成功')
+            response.send(r)
+        } else {
+            var r = JSON.stringify('删除失败')
+            response.send(r)
+        }
+    }
+}
 const routes = [
     all,
-    addSingle
+    addSingle,
+    delSingle
 ]
 
 module.exports.routes = routes
