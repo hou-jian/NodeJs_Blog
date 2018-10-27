@@ -34,6 +34,7 @@ var returnTagsDOM = function(tags, tagsID) {
 
 var loadArticleList = function(data) {
 
+
     // 获取content
     var content = e('.content')
     // 模板添加
@@ -65,9 +66,11 @@ var ajaxArticleData = function() {
         contentType: 'application/json',
         callback: function(response) {
             var res = JSON.parse(response)
-            console.log('回调', response);
+            // console.log('回调', response);
+            // 逆序
+            var data = res.reverse()
             // 调用渲染函数
-            loadArticleList(res)
+            loadArticleList(data)
         }
     })
 
