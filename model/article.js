@@ -130,9 +130,11 @@ b.del = function(articleID) {
         if (d[i].id == articleID) {
             this.data.splice(i, 1)
             this.save()
-            break
+            return true
         }
     }
+
+    return false
 }
 
 // 根据文章id，返回{{文章数据},[标签数组],[标签名称数组]}
@@ -172,6 +174,20 @@ b.arrayIdAll = function(arr) {
 
 b.dataAll = function() {
     return this.data
+}
+
+// 传入，id， 内容
+b.alterArticleContent = function (id, content) {
+    var d = this.data
+    for (var i = 0; i < d.length; i++) {
+        if (d[i].id == id) {
+            this.data[i].content = content
+            console.log('this.data', this.data[i]);
+            this.save()
+            return true
+        }
+    }
+    return false
 }
 // // form存了需要修改的数据
 // b.change = function(form) {

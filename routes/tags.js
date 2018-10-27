@@ -52,6 +52,7 @@ const all = {
 // 验证一篇文章添加标签时，标签名称是否重复
 var repeated = function(form) {
     var tagIDArr = articleTags.returnTagsIDArr(form.articleID)
+    console.log('文章对应标签id', tagIDArr);
     // 根据tagIDArr，返回tagName数组
     var tagsNameArr = tags.returnTagsNameArr(tagIDArr)
     console.log('tagsNameArr', tagsNameArr);
@@ -86,10 +87,19 @@ const addSingle = {
         var form = request.body
         // - 验证密码
         if (form.password !== '410410') {
-            var r = JSON.stringify('添加失败, 密码错误')
+            var r = JSON.stringify('密码错误')
             response.send(r)
             return
         }
+
+        // 验证不能为空
+        if (form.articleID == false) {
+            return
+        } else if (form.tagName == false) {
+            return
+        }
+
+
         // - 验证form.articleID对应的tagName，是否重复
         var o = repeated(form)
         // 为true，说明标签重复，添加失败
@@ -124,7 +134,7 @@ const delSingle = {
         var form = request.body
         // 密码验证
         if (form.password !== '410410') {
-            var r = JSON.stringify('添加失败, 密码错误')
+            var r = JSON.stringify('密码错误')
             response.send(r)
             return
         }
@@ -134,13 +144,8 @@ const delSingle = {
         console.log('form', form.tagID);
         var tagId = parseInt(form.tagID)
         var b = articleTags.delSingle(articleId, tagId)
-        if (b) {
-            var r = JSON.stringify('删除成功')
-            response.send(r)
-        } else {
-            var r = JSON.stringify('删除失败')
-            response.send(r)
-        }
+        var r = JSON.stringify(b)
+        response.send(r)
     }
 }
 const routes = [

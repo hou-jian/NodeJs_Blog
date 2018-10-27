@@ -44,7 +44,7 @@ var handleTags = function(form) {
     console.log('data', data);
     var l = []
 
-    while(true) {
+    while (true) {
         // 获取|下标
         var index = data.indexOf('|')
         // 找不到‘|’,说明切割完毕，返回l
@@ -104,11 +104,11 @@ var tabToggle = function(num) {
         var dom = e(n)
         // console.log('1', dom);
         if (i == num) {
-            dom.style.display="block"
+            dom.style.display = "block"
             continue
         }
 
-        dom.style.display="none"
+        dom.style.display = "none"
     }
 }
 
@@ -129,21 +129,28 @@ var addArticleTag = function() {
     var dom = e('#articleID-tag')
     var articleID = e('.articleID-tag')
     var tagName = e('.tagName-tag')
-    var password = e('.password-tag')
+    var password = e('#password')
 
     bindEvent(dom, 'click', function() {
         var form = {}
         form.articleID = articleID.value
         form.tagName = tagName.value
         form.password = password.value
-
+        if (form.articleID == false) {
+            alert('文章id不能为空')
+            return
+        } else if (form.tagName == false) {
+            alert('标签名不能为空')
+            return
+        }
         ajax({
             method: 'post',
             url: '/api/tags/addSingle',
             contentType: 'application/json',
             data: JSON.stringify(form),
             callback: function(r) {
-                console.log('回调', r)
+                var data = JSON.parse(r)
+                alert(data)
             }
         })
     })
@@ -154,7 +161,7 @@ var addArticleTag = function() {
 var delArticleTag = function() {
     var articleID = e('.articleID-del')
     var tagID = e('.tagID-del')
-    var password = e('.password-del')
+    var password = e('#password')
     var dom = e('#articleID-del-Tag')
     bindEvent(dom, 'click', function() {
         var form = {}
@@ -168,7 +175,8 @@ var delArticleTag = function() {
             contentType: 'application/json',
             data: JSON.stringify(form),
             callback: function(r) {
-                console.log('回调', r)
+                var data = JSON.parse(r)
+                alert(data)
             }
         })
     })
@@ -225,7 +233,7 @@ var renderComment = function(articleID, data) {
     var name = '.article-comment-list' + articleID
     var dom = e(name)
     if (data.length === 0) {
-        dom.innerHTML =  '<span>没有评论</span>'
+        dom.innerHTML = '<span>没有评论</span>'
         return
     }
     var t = ''
@@ -266,22 +274,28 @@ var clickGetAndRenderComment = function() {
 
 var clickDelComment = function() {
     var articleList = e('.article-list')
-    bindEvent(articleList, 'click', function(e) {
-        e.preventDefault()
-        var target = e.target
+    bindEvent(articleList, 'click', function(event) {
+        event.preventDefault()
+        var target = event.target
         if (target.innerHTML === '点击删除') {
             var commentID = target.dataset.id
-            console.log('评论id', commentID)
-            // 发送ajax删除评论
-            var url = '/api/comment/del?commentID=' + commentID
+
+            var form = {}
+            form.password = e('#password').value
+            form.commentID = commentID
+
             ajax({
-                method: 'get',
-                url: url,
+                method: 'post',
+                url: '/api/comment/del',
+                contentType: 'application/json',
+                data: JSON.stringify(form),
                 callback: function(r) {
                     var data = JSON.parse(r)
-                    console.log('回调', data)
+
                     if (data === '删除成功') {
                         target.parentElement.remove()
+                    } else {
+                        alert(data)
                     }
                 }
             })
@@ -307,7 +321,157 @@ var getAndRenderArticle = function() {
         }
     })
 }
+var returnArticleListTwoDom = function(item) {
 
+    var time = formatTime(item.time * 1000)
+
+    var t = `
+    <div class="article-content" style="border: 1px solid #ccc;">
+        <span>${item.id}</span>
+        <span>${item.title}</span>
+        <span>${time}</span>
+        <a href="#" data-id=${item.id}>点击修改内容</a>
+        <a href="#" data-id=${item.id}>点击删除</a>
+    </div>
+    `
+    return t
+}
+// 渲染文章列表(文章修改页)
+var renderArticleTwo = function(data) {
+    var articleList = e('.article-list-two')
+    var t = ''
+    data.forEach(function(item) {
+        // 返回dom结构
+        var d = returnArticleListTwoDom(item)
+        t = t + d
+
+    })
+    articleList.innerHTML = t
+
+}
+
+
+var renderArticleContent = function(data) {
+    var articleAlter = e('.article-alter')
+    var t = `
+        <h2>文章内容修改</h2>
+        <textarea id="textarea" rows="30" cols="100">${data.content}</textarea>
+        <button class="article-alter-up" data-id="${data.id}">提交</button>
+    `
+    articleAlter.innerHTML = t
+}
+var clickReaderArticleContent = function(callback) {
+
+    // 绑定点击事件
+    var articleList = e('.article-list-two')
+    bindEvent(articleList, 'click', function(event) {
+        var target = event.target
+        if (target.innerHTML === '点击修改内容') {
+            // 获取到点击的id
+            var id = target.dataset.id
+            // 获取到id对应的数据
+            var url = '/api/articleID?articleID=' + id
+            ajax({
+                method: 'get',
+                url: url,
+                callback: function(r2) {
+                    var data2 = JSON.parse(r2)
+                    // console.log('data2', data2);
+                    // 渲染文章内容
+                    renderArticleContent(data2)
+                    // 渲染了才能调用这个发送数据
+                    callback()
+                }
+            })
+        }
+    })
+}
+
+var clickAlterButtonUp = function() {
+    // 获取提交按钮
+    var but = e('.article-alter-up')
+    var textarea = e('#textarea')
+    // 绑定事件，获取文本框内容，和文章id
+    bindEvent(but, 'click', function() {
+        var form = {}
+        form.content = textarea.value
+        form.id = but.dataset.id
+        form.password = e('#password').value
+        // ajax提交给服务端
+        ajax({
+            method: 'post',
+            url: '/api/articleID/alter',
+            contentType: 'application/json',
+            data: JSON.stringify(form),
+            callback: function(r) {
+                var data = JSON.parse(r)
+                console.log(data);
+                if (data === true) {
+                    // textarea.value = ''
+                    alert('修改成功')
+                } else if (data === false) {
+                    alert('修改失败')
+                } else {
+                    alert(data)
+                }
+            }
+        })
+    })
+}
+
+var clickDelArticle = function() {
+    // 绑定点击事件
+    var articleList = e('.article-list-two')
+    bindEvent(articleList, 'click', function(event) {
+        var target = event.target
+
+        if (target.innerHTML === '点击删除') {
+            console.log('1');
+            var form = {}
+            form.password = e('#password').value
+            // 获取到点击的id
+            form.articleID = target.dataset.id
+
+            ajax({
+                method: 'post',
+                url: '/api/article/del',
+                contentType: 'application/json',
+                data: JSON.stringify(form),
+                callback: function(r) {
+                    var data = JSON.parse(r)
+                    if (data === true) {
+                        target.parentElement.remove()
+                    }
+                    alert(data)
+                }
+            })
+        }
+    })
+}
+
+var articleContentAlter = function() {
+    // 获取文章数据
+    ajax({
+        method: 'get',
+        url: '/api/article/all',
+        callback: function(r) {
+            // console.log('回调', r)
+            var data = JSON.parse(r)
+            // 渲染到article-list-two
+            renderArticleTwo(data)
+
+        }
+    })
+    // 点击修改内容，获取文章对应的data，并渲染到页面
+    clickReaderArticleContent(function() {
+        // 点击article-alter-up提交按钮，获取内容和文章id，提交给服务端
+        clickAlterButtonUp()
+    })
+
+    // 点击删除文章，删除对应内容
+    clickDelArticle()
+
+}
 var __main = function() {
     // 获取到article数据,并渲染文章页面
     getAndRenderArticle()
@@ -326,6 +490,9 @@ var __main = function() {
 
     // 评论删除功能
     delCommon()
+
+    // 文章内容修改功能
+    articleContentAlter()
 }
 
 __main()

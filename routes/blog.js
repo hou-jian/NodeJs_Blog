@@ -38,15 +38,22 @@ const add = {
 // 只需要url：?articleID=1,即可删除对应文章
 const del = {
     path: '/api/article/del',
-    method: 'get',
+    method: 'post',
     func: function(request, response) {
+        var form = request.body
+        // 密码验证
+        if (form.password !== '410410') {
+
+            response.send(JSON.stringify('删除文章失败，密码错误！'))
+            return
+        }
         // 要删除的articleID
-        var articleID = request.query.articleID
+        var articleID = form.articleID
 
-        article.del(articleID)
+        var boole = article.del(articleID)
         articleTags.del(articleID)
-
-        response.send('删除成功')
+        var data = JSON.stringify(boole)
+        response.send(data)
     }
 }
 
@@ -55,7 +62,7 @@ const articleID = {
     method: 'get',
     func: function(request, response) {
         var articleID = request.query.articleID
-        
+
         if (!articleID) {
             var r = JSON.stringify('articleID参数错误')
             response.send(r)
@@ -67,6 +74,26 @@ const articleID = {
         response.send(r)
     }
 }
+
+const alterArticleContent = {
+    path: '/api/articleID/alter',
+    method: 'post',
+    func: function(request, response) {
+        var form = request.body
+        console.log('密码', form.password);
+        // 密码验证
+        if (form.password !== '410410') {
+            var data = JSON.stringify('添加文章失败，密码错误！')
+            response.send(data)
+            return
+        }
+        var boole = article.alterArticleContent(form.id, form.content)
+
+        var r = JSON.stringify(boole)
+        response.send(r)
+    }
+}
+
 // // 提供id，修改内容(除了id、时间，全修改了！)
 // const changeArticle = {
 //     path: '/api/article/changeArticle',
@@ -119,7 +146,8 @@ const routes = [
     all,
     add,
     del,
-    articleID
+    articleID,
+    alterArticleContent
 ]
 
 module.exports.routes = routes

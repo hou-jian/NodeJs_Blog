@@ -139,7 +139,7 @@ b.returnTagsIDArr = function(id) {
     var tagsIDArr = []
     for (var i = 0; i < d.length; i++) {
         var item = d[i]
-        if (id === item.articleID) {
+        if (id == item.articleID) {
             tagsIDArr.push(item.tagsID)
         }
     }

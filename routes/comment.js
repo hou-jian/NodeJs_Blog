@@ -31,11 +31,17 @@ const articleAll = {
 // 根据id删除
 const del = {
     path: '/api/comment/del',
-    method: 'get',
+    method: 'post',
     func: function(request, response) {
-        var commentId = request.query.commentID
+        var form = request.body
+        // 密码验证
+        if (form.password !== '410410') {
+            response.send(JSON.stringify('密码错误'))
+            return
+        }
+        var commentId = form.commentID
         console.log('commentId', commentId);
-        
+
         var b = comment.del(commentId)
         if (b) {
             var r = JSON.stringify('删除成功')
