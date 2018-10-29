@@ -94,6 +94,26 @@
     color: #3f51b5;
     background: #dadada;
 }
+
+
+.page-nav span {
+    display: inline-block;
+    line-height: 34px;
+    padding: 0 14px;
+    margin: 0 2px;
+    font-size: 14px;
+    color: #727272;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor:pointer;
+    -webkit-transition: .4s ease-in-out;
+    transition: .4s ease-in-out;
+}
+.page-nav span:hover {
+    color: #3f51b5;
+    background: #dadada;
+}
+
 .page-nav .page-nav-activate {
     background: #3f51b5 !important;
     color: #fff !important;

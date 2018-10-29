@@ -5,7 +5,7 @@ const all = {
     path: '/api/article/all',
     method: 'get',
     func: function(request, response) {
-        // 读取文章数据（article见第一行）
+        // 读取文章数据
         var data = article.all()
         var r = JSON.stringify(data)
         response.send(r)

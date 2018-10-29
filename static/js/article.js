@@ -1,4 +1,4 @@
-var RenderMarkdown = function(data) {
+var renderMarkdown = function(data) {
     // 修改标题
     e('.article-title-h1').innerHTML  = data.title
     e('.article-content').innerHTML = marked(data.content, {
@@ -32,7 +32,7 @@ var getArticleData = function() {
         callback: function(response) {
             var res = JSON.parse(response)
             // console.log('回调', response);
-            RenderMarkdown(res)
+            renderMarkdown(res)
         }
     })
 }

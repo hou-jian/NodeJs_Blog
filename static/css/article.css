@@ -14,7 +14,7 @@ pre {
 .article {
     padding: 36px 36px 0 36px;
     -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     min-height: 100%;
     width: 80%;
@@ -44,7 +44,7 @@ pre {
     overflow: hidden;
 }
 
-/* ===============================article-content============================ */
+/* ===============================article-content markdown样式============================ */
 .article-content h2 {
     color: #3f51b5;
     font-weight: 400;
@@ -58,17 +58,6 @@ pre {
     font-size: 16px;
 }
 
-.article-content code {
-    color: #ff4081;
-    line-height: 1;
-    margin: 0 4px;
-    font-size: 80%;
-    padding: 3px 5px;
-    border: 1px solid #eee;
-    border-radius: 2px;
-    word-wrap: break-word;
-}
-
 .language-js {
     color: inherit !important;
     border: none !important;
@@ -79,6 +68,37 @@ pre {
 .article-content pre {
     background: #f5f5f5;
     padding: 15px;
+    margin: 0 -36px;
+}
+
+.article-content pre>code {
+    padding: 3px 5px;
+    border: none;
+}
+
+.article-content code {
+    color: #ff4081;
+    margin: 0 4px;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 0;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    word-wrap: break-word;
+}
+
+.article-content img {
+    max-width: 100%;
+}
+
+.article-content a {
+    color: #3f51b5;
+}
+
+.article-content hr {
+    background-color: #ddd;
+    height: 1px;
+    border: none;
     margin: 0 -36px;
 }
 
@@ -166,7 +186,7 @@ pre {
     padding: 30px;
     background: #fff;
     -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     float: left;
 }
@@ -254,7 +274,7 @@ pre {
     background: #3f51b5;
     border-color: #3f51b5;
     -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* 评论总数 */
