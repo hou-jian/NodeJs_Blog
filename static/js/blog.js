@@ -36,15 +36,8 @@ var loadArticleList = function(data) {
 
     // 获取content
     var content = e('.content')
-    // 第一页只渲染10个
-    var length
-    if (data.length < 10) {
-        length = data.length
-    } else {
-        length = 10
-    }
-    // 首次只循环渲染10篇
-    for (var i = 0; i < length; i++) {
+
+    for (var i = 0; i < data.length; i++) {
         // 1. 渲染文章内容
         // 返回section模板
         var s = returnSectionTemplate(data[i])
@@ -56,7 +49,7 @@ var loadArticleList = function(data) {
         // 获取当前section的标签数组
         var tag = data[i].tags
         var tagsID = data[i].tagsIDArr
-        // 返回tags的dom
+        // 获取tags的dom
         var t = returnTagsTemplate(tag, tagsID)
         // 添加到section>tags-list中
         tagDOM.innerHTML = t
@@ -74,54 +67,65 @@ var ajaxArticleData = function(callback) {
             // console.log('回调', response);
             // 逆序
             var data = res.reverse()
-            console.log('data:', data);
+            // console.log('data:', data);
             callback(data)
         }
     })
 
 }
 
-var readerNav = function(pages) {
+var readerNav = function(pages, pageID) {
     var pageNav = e('.page-nav')
     pageNav.insertAdjacentHTML('beforeend', '<span class="page-up">上一页</span>')
     var n = ''
     for (var i = 0; i < pages; i++) {
         if (i === 0) {
-            n = n + `<a href="JavaScript:;" class="page-nav-activate"  data-pageID=${i}>${i + 1}</a>`
+            n = n + `<a href="#0">${i + 1}</a>`
         } else {
-            n = n + `<a href="JavaScript:;"  data-pageID=${i}>${i + 1}</a>`
+            n = n + `<a href="#${i}">${i + 1}</a>`
         }
     }
 
     pageNav.insertAdjacentHTML('beforeend', n)
     pageNav.insertAdjacentHTML('beforeend', '<span class="page-down">下一页</span>')
 
+    // 处理导航样式.page-nav-activate切换class
+    var domList = pageNav.children
+    // console.log('domList', pageID, domList);
+    for (var i = 0; i < domList.length; i++) {
+        domList[i].classList.remove('page-nav-activate')
+    }
+
+    domList[parseInt(pageID) + 1].classList.add('page-nav-activate')
 }
 
 var readerSpecifiedPage = function(data, pageData, pageID) {
+
     // 清空页面
     var content = e('.content')
     while (content.firstChild) {
         content.removeChild(content.firstChild)
     }
-
+    var startIndex = 0
+    var endIndex = 0
     // 根据pageID切割data
-    var startIndex = pageID * pageData.size
-    var endIndex = startIndex + pageData.size
-
+    var pageID = parseInt(pageID)
+    startIndex = pageID * pageData.size
+    endIndex = startIndex + pageData.size
+    if (endIndex > data.length) {
+        endIndex = data.length
+    }
+    // console.log('切片', startIndex, endIndex);
     var singlePageData = data.slice(startIndex, endIndex)
-    console.log('处理后的数据', singlePageData);
+
+    // console.log('处理后的数据', singlePageData);
     // 渲染页面
-    loadArticleList(singlePageData)
+    loadArticleList(singlePageData, pageID)
 }
 
-var clickPageNumber = function(pageNav, target, data, pageData) {
+var clickNumberBut = function(pageNav, target, pageData) {
     if (target.nodeName === 'A') {
-        // 获取到点击的页码
-        var pageID = target.dataset.pageid
-
-        // 渲染该页码的页面
-        readerSpecifiedPage(data, pageData, pageID)
+        backTop()
         // 处理导航样式.page-nav-activate切换class
         var domList = pageNav.children
         for (var i = 0; i < domList.length; i++) {
@@ -131,65 +135,59 @@ var clickPageNumber = function(pageNav, target, data, pageData) {
     }
 }
 
-var handleUPButton = function(data, target, activateID, pageData, pageNav) {
+var handleUPButton = function(target, pageNav) {
     if (target.innerHTML === '上一页') {
-        // 在第一页不处理
-        if (activateID == '0') {
-            // console.log('不处理');
+        var pageID = parseInt(location.hash.slice(1))
+        if (pageID === 0) {
             return
         }
-        var pageID = parseInt(activateID) - 1
-        // 渲染该页码的页面
-        readerSpecifiedPage(data, pageData, pageID)
+        // console.log('???', pageID);
+        location.hash = '#' + (pageID - 1)
         // 处理导航样式.page-nav-activate切换class
         var domList = pageNav.children
         for (var i = 0; i < domList.length; i++) {
             domList[i].classList.remove('page-nav-activate')
         }
-        domList[pageID + 1].classList.add('page-nav-activate')
+        domList[pageID].classList.add('page-nav-activate')
     }
 
 }
 
-var handleDownButton = function(data, target, activateID, pageData, pageNav) {
+var handleDownButton = function(target, pageNav, pageData) {
     if (target.innerHTML === '下一页') {
-        // 在最后一页不处理
-        if (activateID == (pageData.pages - 1)) {
-            // console.log('不处理');
+        var pageID = parseInt(location.hash.slice(1))
+
+        // 在最后一页不执行
+        if (pageID === pageData.pages - 1) {
             return
         }
-        var pageID = parseInt(activateID) + 1
-        // 渲染该页码的页面
-        readerSpecifiedPage(data, pageData, pageID)
+
+        location.hash = '#' + (pageID + 1)
+
         // 处理导航样式.page-nav-activate切换class
         var domList = pageNav.children
+
         for (var i = 0; i < domList.length; i++) {
             domList[i].classList.remove('page-nav-activate')
         }
 
-        domList[pageID + 1].classList.add('page-nav-activate')
-
+        domList[pageID + 2].classList.add('page-nav-activate')
     }
 }
 
-var clickPageUpDownButton = function(pageNav, target, data, pageData) {
-    // 获取当前激活的按钮
-    var activate = e('.page-nav-activate')
-    // 获取激活按钮的id
-    var activateID = activate.dataset.pageid
-    // console.log('activateID', activateID);
-
+var clickUpAndDownAlterHash = function(pageNav, target, pageData) {
     // 判断点击的是否为上下按钮
     if (target.nodeName === 'SPAN') {
+        backTop()
         // 处理点击上一页
-        handleUPButton(data, target, activateID, pageData, pageNav)
+        handleUPButton(target, pageNav)
         // 处理点击下一页
-        handleDownButton(data, target, activateID, pageData, pageNav)
+        handleDownButton(target, pageNav, pageData)
 
     }
 }
 
-var clickNavReaderArticleList = function(data, pageData) {
+var clickNavAlterHash = function(pageData) {
     // 获取nav
     var pageNav = e('.page-nav')
     bindEvent(pageNav, 'click', function(event) {
@@ -199,34 +197,45 @@ var clickNavReaderArticleList = function(data, pageData) {
             return
         }
         // 点击页码渲染页面
-        clickPageNumber(pageNav, target, data, pageData)
+        clickNumberBut(pageNav, target, pageData)
 
         // 点击上下页渲染页面
-        clickPageUpDownButton(pageNav, target, data, pageData)
+        clickUpAndDownAlterHash(pageNav, target, pageData)
     })
 }
 
 var __main = function() {
-    onload = function () {
-        // ajax获取数据, callback函数处理页面
-        ajaxArticleData(function(data) {
-            // 设置分页参数
-            var pageData = {}
-            pageData.total = data.length
-            pageData.size = 10
-            pageData.pages = Math.ceil(pageData.total / pageData.size)
-            // console.log(pageData);
 
-            // 根据data数量渲染分页导航栏
-            readerNav(pageData.pages)
 
-            // 默认渲染第一页
-            loadArticleList(data)
+    // ajax获取数据, callback函数处理页面
+    ajaxArticleData(function(data) {
+        // 设置分页参数
+        var pageData = {}
+        pageData.total = data.length
+        pageData.size = 10
+        pageData.pages = Math.ceil(pageData.total / pageData.size)
 
-            // 点击导航栏渲染指定页
-            clickNavReaderArticleList(data, pageData)
+        // 载入页面时，更具#x渲染对应页
+        var pageID = location.hash.slice(1)
+        if (!pageID) {
+            pageID = 0
+        }
+        readerSpecifiedPage(data, pageData, pageID)
+
+        // 渲染分页导航栏
+        readerNav(pageData.pages, pageID)
+
+        // 点击导航栏修改url的#(即：hash)
+        clickNavAlterHash(pageData)
+
+        // url的#x 改变重新渲染页面
+        bindEvent(window, 'hashchange', function() {
+            var pageID = location.hash.slice(1)
+            // console.log('pageID', pageID);
+            readerSpecifiedPage(data, pageData, pageID)
         })
-    }
+
+    })
 
 
 }

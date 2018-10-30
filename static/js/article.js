@@ -89,10 +89,10 @@ var addComment = function() {
             data: JSON.stringify(form),
             callback: function(response) {
                 var res = JSON.parse(response)
-                console.log('res', res);
                 // 把新添加的评论渲染到页面
                 renderComment(res)
-
+                var dom = e('#comments-number')
+                dom.innerHTML = parseInt(dom.innerHTML) + 1
                 e('#formContent').value = ''
             }
         })
@@ -106,6 +106,11 @@ var renderCommentAll = function(data) {
     }
 }
 
+var renderCommentNumber = function(length) {
+    var dom = e('#comments-number')
+    dom.innerHTML = length
+}
+
 var getCommentData = function() {
     ajax({
         method: 'get',
@@ -113,7 +118,10 @@ var getCommentData = function() {
 
         callback: function(response) {
             var res = JSON.parse(response)
+            // 渲染全部评论
             renderCommentAll(res)
+            // 渲染评论数
+            renderCommentNumber(res.length)
         }
     })
 }
