@@ -120,7 +120,7 @@ pre {
 }
 
 /* =================================article-nav--------------------------- */
-.article-nav {
+/* .article-nav {
     width: 20%;
     float: right;
     padding-left: 30px;
@@ -175,7 +175,7 @@ pre {
     .article-nav {
         display: none;
     }
-}
+} */
 
 /* ==========================article-comment============================== */
 .comment {
@@ -275,6 +275,15 @@ pre {
     border-color: #3f51b5;
     -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+@media screen and (max-width: 768px) {
+    .comment-submit:hover {
+        color: #313131;
+        background: #ededed;
+        border-color: inherit;
+        box-shadow: none;
+    }
 }
 
 /* 评论总数 */

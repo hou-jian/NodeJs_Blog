@@ -81,7 +81,8 @@ var addComment = function() {
             return
         }
 
-
+        e('#formContent').value = ''
+        
         ajax({
             method: 'post',
             url: '/api/comment/add',
@@ -93,7 +94,7 @@ var addComment = function() {
                 renderComment(res)
                 var dom = e('#comments-number')
                 dom.innerHTML = parseInt(dom.innerHTML) + 1
-                e('#formContent').value = ''
+
             }
         })
     })
