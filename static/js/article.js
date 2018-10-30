@@ -48,10 +48,10 @@ var returnCommentDom = function(form) {
             <div class="comment-username">${form.name}</div>
             <div class="comment-time">${time}</div>
             <div class="comment-content">${form.content}</div>
-            <button class="comment-reply">回复</button>
         </div>
     </div>
     `
+    //这是二级回复的，需要再加 <button class="comment-reply">回复</button>
     return d
 }
 
@@ -82,7 +82,7 @@ var addComment = function() {
         }
 
         e('#formContent').value = ''
-        
+
         ajax({
             method: 'post',
             url: '/api/comment/add',

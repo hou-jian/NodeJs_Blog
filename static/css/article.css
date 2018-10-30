@@ -277,12 +277,21 @@ pre {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
+
+
 @media screen and (max-width: 768px) {
     .comment-submit:hover {
         color: #313131;
         background: #ededed;
         border-color: inherit;
         box-shadow: none;
+    }
+    .comment-submit:active {
+        color: #fff;
+        background: #3f51b5;
+        border-color: #3f51b5;
+        -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
 }
 
