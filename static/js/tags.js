@@ -64,7 +64,7 @@ var readerTagsList = function() {
     var box = e('.box')
     for (var i = 0; i < tagsIDarr.length; i++) {
 
-        // 根据tagsID返回tagsName
+        // 根据tagsID返回tagsName(用来显示标签名称)
         var tagName = returnTagsName(tagsIDarr[i])
 
         // 渲染tags标题
@@ -75,7 +75,6 @@ var readerTagsList = function() {
 
         // 渲染tags标题对应的文章项
         readerArticleList(box, articleIDArr)
-
     }
 }
 var loadItemsAll = function() {
@@ -93,7 +92,7 @@ var loadItemsAll = function() {
         var active = e('.active')
         active.classList.remove('active')
 
-        // 渲染制定页面
+        // 渲染指定页面
         readerItem()
     }
 
@@ -106,7 +105,7 @@ var readerItem = function() {
     box.innerHTML = ''
 
     if (tagsID == '') {
-        // 渲染标题与文章列表
+        // 渲染所有列表
         readerTagsList()
         return
     }
@@ -117,26 +116,51 @@ var readerItem = function() {
     // 渲染tags标题
     readerH3(box, tagName)
 
-    // 拿到tagsID对应的articleID数组
+    // 获取tagsID对应的articleID数组数据
     var articleIDArr = tagsId_articleIdArr_data[tagsID]
 
-    // 渲染tags标题对应的文章项
+    // 渲染文章项
     readerArticleList(box, articleIDArr)
+
+    // 导航栏样式处理(红色下划线)
+
+    var navList = e('#tags-nav-list').children
+
+    for (var i = 0; i < navList.length; i++) {
+        var value = navList[i].firstChild.innerHTML
+
+        if (value === tagName) {
+            navList[i].classList.add('active')
+        } else {
+            navList[i].classList.remove('active')
+        }
+    }
+
 }
 
 var toggleNav = function() {
-    var nav = e('.tags-nav')
+    var nav = e('#tags-nav-list')
     bindEvent(nav, 'click', function(event) {
-        var dom = e('.active')
-        // 获取到点击的li元素
-        var li = event.target.parentElement
-        if (li.classList.contains('sign')) {
-            return
+
+        var target = event.target
+        if (target.nodeName === 'A') {
+
+            // 获取父节点
+            var parentElement = target.parentElement
+            // 有active直接结束
+            if (parentElement.classList.contains('active')) {
+                return
+            }
+
+            // 删除所有的class=active
+            var list = nav.children
+            for (var i = 0; i < list.length; i++) {
+                list[i].classList.remove('active')
+            }
+
+            // 给点击元素添加
+            parentElement.classList.add('active')
         }
-        // 删除原有的激活元素
-        dom.classList.remove('active')
-        // 添加激活状态
-        li.classList.add('active')
     })
 }
 
