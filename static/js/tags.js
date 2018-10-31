@@ -76,6 +76,7 @@ var readerTagsList = function() {
         // 渲染tags标题对应的文章项
         readerArticleList(box, articleIDArr)
     }
+    NProgress.done()
 }
 var loadItemsAll = function() {
     // 渲染导航栏
@@ -95,8 +96,6 @@ var loadItemsAll = function() {
         // 渲染指定页面
         readerItem()
     }
-
-
 }
 
 var readerItem = function() {
@@ -135,7 +134,7 @@ var readerItem = function() {
             navList[i].classList.remove('active')
         }
     }
-
+    NProgress.done()
 }
 
 var toggleNav = function() {
@@ -172,6 +171,9 @@ var clickNav = function() {
     })
 }
 var __main = function() {
+    NProgress.start()
+    NProgress.inc()
+
     // 请求数据
     ajax({
         method: 'GET',
@@ -196,6 +198,8 @@ var __main = function() {
 
     // 检测url发生改变渲染对应的文章列表
     window.onpopstate = function() {
+        NProgress.start()
+        NProgress.inc()
         readerItem()
     }
 

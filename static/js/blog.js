@@ -57,7 +57,8 @@ var loadArticleList = function(data) {
 }
 
 var ajaxArticleData = function(callback) {
-
+    NProgress.start()
+    NProgress.inc()
     ajax({
         method: 'GET',
         url: '/api/article/all',
@@ -121,6 +122,7 @@ var readerSpecifiedPage = function(data, pageData, pageID) {
     // console.log('处理后的数据', singlePageData);
     // 渲染页面
     loadArticleList(singlePageData, pageID)
+    NProgress.done();
 }
 
 var clickNumberBut = function(pageNav, target, pageData) {
@@ -191,6 +193,8 @@ var clickNavAlterHash = function(pageData) {
     // 获取nav
     var pageNav = e('.page-nav')
     bindEvent(pageNav, 'click', function(event) {
+        NProgress.start()
+        NProgress.inc()
         var target = event.target
         // 如果有激活状态，说明重复点击，不处理
         if (target.classList.contains('page-nav-activate')) {
@@ -201,11 +205,13 @@ var clickNavAlterHash = function(pageData) {
 
         // 点击上下页渲染页面
         clickUpAndDownAlterHash(pageNav, target, pageData)
+
+        NProgress.done();
+
     })
 }
 
 var __main = function() {
-
 
     // ajax获取数据, callback函数处理页面
     ajaxArticleData(function(data) {

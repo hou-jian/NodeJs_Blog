@@ -82,7 +82,8 @@ var addComment = function() {
         }
 
         e('#formContent').value = ''
-
+        NProgress.start()
+        NProgress.inc()
         ajax({
             method: 'post',
             url: '/api/comment/add',
@@ -94,7 +95,7 @@ var addComment = function() {
                 renderComment(res)
                 var dom = e('#comments-number')
                 dom.innerHTML = parseInt(dom.innerHTML) + 1
-
+                NProgress.done()
             }
         })
     })
@@ -123,16 +124,21 @@ var getCommentData = function() {
             renderCommentAll(res)
             // 渲染评论数
             renderCommentNumber(res.length)
+            NProgress.done()
         }
     })
 }
 var __main = function() {
     onload = function() {
+        NProgress.start()
+        NProgress.inc()
+
         window.articleID = location.hash.slice(1)
         // 获取文章数据,并渲染
         getArticleData()
         // 获取评论数据，并渲染
         getCommentData()
+
     }
     // 添加评论
     addComment()
