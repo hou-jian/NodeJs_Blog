@@ -54,6 +54,23 @@ ul {
     width: 8px;
     height: 8px;
 }
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+    height: 8px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    background-color: #b6b6b6;
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+/* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
     background-color: #b6b6b6;
     border: 1px solid #fff;
