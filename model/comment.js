@@ -82,7 +82,7 @@ b.del = function(commentId) {
     var boo = false
     d.forEach((item, index) => {
         if (item.id == commentId) {
-            console.log('index', index);
+            // console.log('index', index);
             this.data.splice(index, 1)
             this.save()
             boo =  true

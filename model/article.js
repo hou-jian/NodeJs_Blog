@@ -182,7 +182,7 @@ b.alterArticleContent = function (id, content) {
     for (var i = 0; i < d.length; i++) {
         if (d[i].id == id) {
             this.data[i].content = content
-            console.log('this.data', this.data[i]);
+            // console.log('this.data', this.data[i]);
             this.save()
             return true
         }

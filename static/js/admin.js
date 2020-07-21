@@ -2,7 +2,7 @@ var readFileContent = function(callback) {
     //
     var file = document.getElementById('file')
     var files = file.files
-    console.log("files", files[0]);
+    // console.log("files", files[0]);
     if (files[0] !== undefined) {
         // 实例化FileReader对象,以使用其方法
         var reader = new FileReader();
@@ -41,7 +41,7 @@ var getFormData = function(form) {
 var handleTags = function(form) {
 
     var data = form.tags
-    console.log('data', data);
+    // console.log('data', data);
     var l = []
 
     while (true) {
@@ -80,7 +80,7 @@ var upData = function() {
             form.content = t
             // 3.转换tags为array
             handleTags(form)
-            console.log('form准备完毕, 即将上传！', form);
+            // console.log('form准备完毕, 即将上传！', form);
             // 4. 准备完毕上传给服务器
             ajax({
                 method: 'post',
@@ -405,7 +405,7 @@ var clickAlterButtonUp = function() {
             data: JSON.stringify(form),
             callback: function(r) {
                 var data = JSON.parse(r)
-                console.log(data);
+                // console.log(data);
                 if (data === true) {
                     // textarea.value = ''
                     alert('修改成功')
@@ -426,7 +426,7 @@ var clickDelArticle = function() {
         var target = event.target
 
         if (target.innerHTML === '点击删除') {
-            console.log('1');
+            // console.log('1');
             var form = {}
             form.password = e('#password').value
             // 获取到点击的id

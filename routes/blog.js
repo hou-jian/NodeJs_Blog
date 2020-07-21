@@ -1,3 +1,4 @@
+// 这里需要导入model模块，处理数据
 const article = require('../model/article.js')
 const articleTags = require('../model/articleTags.js')
 // 获取所有文章，不包括文章内容

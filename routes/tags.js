@@ -1,3 +1,4 @@
+// 导入model模块，处理数据
 const articleTags = require('../model/articleTags.js')
 const article = require('../model/article.js')
 const tags = require('../model/tags.js')
@@ -52,10 +53,10 @@ const all = {
 // 验证一篇文章添加标签时，标签名称是否重复
 var repeated = function(form) {
     var tagIDArr = articleTags.returnTagsIDArr(form.articleID)
-    console.log('文章对应标签id', tagIDArr);
+    // console.log('文章对应标签id', tagIDArr);
     // 根据tagIDArr，返回tagName数组
     var tagsNameArr = tags.returnTagsNameArr(tagIDArr)
-    console.log('tagsNameArr', tagsNameArr);
+    // console.log('tagsNameArr', tagsNameArr);
     // 遍历tagsNameArr，如果和form.tagName重复返回 true
     for (var i = 0; i < tagsNameArr.length; i++) {
         if (form.tagName === tagsNameArr[i]) {
@@ -141,7 +142,7 @@ const delSingle = {
 
         // 传给articleTags model 删除同时包含这两个的数据
         var articleId = parseInt(form.articleID)
-        console.log('form', form.tagID);
+        // console.log('form', form.tagID);
         var tagId = parseInt(form.tagID)
         var b = articleTags.delSingle(articleId, tagId)
         var r = JSON.stringify(b)
